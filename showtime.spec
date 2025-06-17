@@ -16,13 +16,16 @@ BuildRequires:	libadwaita-devel >= 1.6
 BuildRequires:	meson >= 0.62.0
 BuildRequires:	ninja >= 1.5
 BuildRequires:	pkgconfig
-BuildRequires:	python3 >= 1:3
+BuildRequires:	python3 >= 1:3.2
+BuildRequires:	rpm-pythonprov
+BuildRequires:	rpmbuild(macros) >= 2.042
 BuildRequires:	tar >= 1:1.22
 BuildRequires:	xz
 Requires(post,postun):	gtk-update-icon-cache
 Requires:	glib2 >= 1:2.26.0
 Requires:	gtk4 >= 4.15.0
 Requires:	libadwaita >= 1.6
+BuildArch:	noarch
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -44,6 +47,9 @@ Showtime - oglądanie bez rozpraszania.
 rm -rf $RPM_BUILD_ROOT
 
 %meson_install
+
+%py3_comp $RPM_BUILD_ROOT%{py3_sitescriptdir}/showtime
+%py3_ocomp $RPM_BUILD_ROOT%{py3_sitescriptdir}/showtime
 
 %find_lang %{name}
 
